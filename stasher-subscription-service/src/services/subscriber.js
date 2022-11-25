@@ -1,5 +1,6 @@
 const amqp = require('amqplib/callback_api');
 const SubscriptionService = require("./subscriptionService");
+require("dotenv").config();
 
 module.exports = class Subscriber {
     constructor() {
@@ -8,11 +9,11 @@ module.exports = class Subscriber {
     
     async initSubscriber() {
         var raabitmqSettings = {
-            protocol: 'amqp',
-            hostname: 'rabbitmq',
-            port: 5672,
-            username: 'rabbitmquser',
-            password: 'rabbitmqpassword'
+            protocol: process.env.RABBITMQ_PROTOCOL,
+            hostname: process.env.RABBITMQ_HOST,
+            port: process.env.RABBITMQ_PORT,
+            username:  process.env.RABBITMQ_USER,
+            password: process.env.RABBITMQ_PASSWORD
         }
        
     await amqp.connect(raabitmqSettings, async function(err,connection) {
