@@ -16,8 +16,8 @@ module.exports = class SubscriptionService {
         return await this.subscribedUserRepository.deleteSubscribedUser(email,category);
     }
 
-    async getAllSubscribedUsers() {
-        return await this.subscribedUserRepository.getAllSubscribedUser();
+    async getAllSubscribedByUser(email) {
+        return await this.subscribedUserRepository.getAllSubscribedByUser(email);
     }
 
     async sendEmail(category,message) {

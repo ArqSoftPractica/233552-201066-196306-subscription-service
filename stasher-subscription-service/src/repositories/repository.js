@@ -9,6 +9,13 @@ module.exports = class Repository {
         this.connection = null;
     }
     static async connect() {
+        var connection = await mysql.createConnection({
+            host: process.env.DB_HOST,
+            port: process.env.DB_PORT,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD
+        });
+        await connection.query('CREATE DATABASE IF NOT EXISTS ' + process.env.DB_NAME);
         this.connection = await new Sequelize({
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
@@ -24,14 +31,13 @@ module.exports = class Repository {
                 idle: 10000
             }
         });
-        const connection = await mysql.createConnection({
+        var connection = await mysql.createConnection({
             host: process.env.DB_HOST,
             port: process.env.DB_PORT,
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME
         });
-        await connection.query('CREATE DATABASE IF NOT EXISTS ' + process.env.DB_NAME);
     }
 
 

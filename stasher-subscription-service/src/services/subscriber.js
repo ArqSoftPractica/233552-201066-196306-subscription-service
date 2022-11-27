@@ -15,8 +15,11 @@ module.exports = class Subscriber {
             username:  process.env.RABBITMQ_USER,
             password: process.env.RABBITMQ_PASSWORD
         }
-       
+    
     await amqp.connect(raabitmqSettings, async function(err,connection) {
+      if (err) {
+          throw err;
+      }
      
         const channel = await connection.createChannel();
         channel.prefetch(10);

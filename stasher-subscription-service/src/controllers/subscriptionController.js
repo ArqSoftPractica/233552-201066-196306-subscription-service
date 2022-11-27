@@ -27,6 +27,26 @@ module.exports = class IncomeController {
         await next();
     }
 
+    async getAllSubscribedByUser(ctx, next) {
+        try {
+            let email = ctx.query.email;
+            let list = await this.subscriptionService.getAllSubscribedByUser(email);
+            ctx.body = { message: list };
+            createLogger.info(
+                `${ctx.request.method} on url ${ctx.request.url} `
+                );
+        } catch (err) {
+            ctx.status = 404;
+            ctx.body = { status: 404, message: err.message };
+            createLogger.error(
+                `${ctx.request.method} on url ${ctx.request.url}-> error ocurred: 400 ${err.message}`
+            );
+        }
+        await next();
+        }
+
+
+
     async unsubscribe(ctx, next) {
         try {
             let email = ctx.query.email;

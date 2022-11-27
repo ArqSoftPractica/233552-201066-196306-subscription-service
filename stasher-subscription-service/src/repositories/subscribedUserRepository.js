@@ -10,8 +10,11 @@ module.exports = class SubscribedUserRepository {
   async addSubscribedUser(data) {
     try {
        const user= data.data
-       user.categoryName = data.categoryName
-        let existing = await this.userRepository.findOne({ where: { emailAddress: user.emailAddress,  categoryName:user.categoryName} });
+       user.categoryName = data.categoryName;
+       user.id = null;
+        let existing = await this.userRepository.findOne({ where: { emailAddress: user.emailAddress,  categoryName:user.categoryName} }).then((result) => {
+            return result;
+        });
         if (existing == null) {
           let subscribedUser = await this.userRepository.create(user);
           return subscribedUser;
@@ -23,9 +26,9 @@ module.exports = class SubscribedUserRepository {
     }
   }
 
-  async getAllSubscribedUser() {
+  async getAllSubscribedByUser(email) {
     try {
-       return await this.userRepository.findAll();
+       return await this.userRepository.findAll({ where: { emailAddress: email } });
     } catch (err) {
       throw new Error(err.message)
     }

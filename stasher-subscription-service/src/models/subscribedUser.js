@@ -7,10 +7,6 @@ const SubscribedUser = (schema, types) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        name: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
         emailAddress: {
             type: Sequelize.STRING,
             allowNull: false
