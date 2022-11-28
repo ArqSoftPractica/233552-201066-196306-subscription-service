@@ -1,6 +1,8 @@
 const SubscribedUserRepository = require("../repositories/subscribedUserRepository");
 const createLogger = require("../logger/log");
 const nodemailer = require("nodemailer");
+const axios = require("axios");
+require("dotenv").config();
 
 module.exports = class SubscriptionService {
 
@@ -56,5 +58,24 @@ module.exports = class SubscriptionService {
             );     
         }
     }
+
+    async auth(ctx, next) {    
+        let token = ctx.get("authentication")
+        return new Promise(async (resolve, reject) => {
+          return axios
+            .post(`${process.env.STASHER_AUTH_SERVICE_URL}/authentication`, ctx,{
+              headers: {
+                authentication: token 
+              }
+            })
+            .then((response) => {
+              console.log(response.data)
+              resolve(response.data);
+            })
+            .catch((error) => {
+              reject(new Error(error.response.data.message));
+            });
+        });
+      }
 
 }
