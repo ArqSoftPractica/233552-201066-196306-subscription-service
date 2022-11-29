@@ -33,7 +33,7 @@ class Server {
       const createLogger = require("./src/logger/log");
           try {
               var url = ctx.originalUrl
-              if(url!="/api/login" && url!="/api/administrator" && !url.includes("/api/user") &&
+              if(url!="/api/login" && url!="/api/administrator" && !url.includes("/api/notification") && !url.includes("/api/user") &&
               url!="/api/categories/expenses" && !url.includes("/api/expenses") && !url.includes("/api/income")){
                   await subscriptionService.auth(ctx,next);
               }

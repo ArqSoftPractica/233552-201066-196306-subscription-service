@@ -29,8 +29,8 @@ services:
     container_name: rabbitmq
     restart: always
     ports:
-        - 5673:5672
-        - 15673:15672
+        - 5672:5672
+        - 15672:15672
     environment:
         AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
         RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}

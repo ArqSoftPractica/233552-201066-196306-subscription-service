@@ -10,7 +10,6 @@ module.exports = class IncomeController {
 
     async subscribe(ctx, next) {
         try {
-        console.log(ctx.request.body)
         let data = ctx.request.body;
         let user = await this.subscriptionService.addSubscribedUser(data);
         ctx.body = { data: user };
@@ -66,6 +65,5 @@ module.exports = class IncomeController {
         }
         await next();
     }
-
  
 }
