@@ -33,8 +33,6 @@ module.exports = class SubscriptionService {
         let users = await this.getAllSubscribedUsers()
         users.forEach(subscribedUser => {
             if(subscribedUser.dataValues.categoryName==category.split('"')[0]){
-                console.log("=================2===============")
-                console.log(message.split('"')[1])
                  var mailOptions = {
                     from: "obligatorioarqusoft@gmail.com",
                     to: subscribedUser.dataValues.emailAddress,

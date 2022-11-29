@@ -51,7 +51,7 @@ services:
       rabbitmq:
         condition: service_healthy
     build: .
-    command: ["node",  "index.js"]
+    command: [ "node", "-r", "newrelic", "index.js" ]
     ports:
       - "6061:6061"
     env_file: .env 
