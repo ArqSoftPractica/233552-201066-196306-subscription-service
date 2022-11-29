@@ -77,7 +77,6 @@ module.exports = class SubscriptionService {
               }
             })
             .then((response) => {
-              console.log(response.data)
               resolve(response.data);
             })
             .catch((error) => {
