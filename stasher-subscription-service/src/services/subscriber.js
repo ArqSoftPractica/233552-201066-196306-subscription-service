@@ -24,7 +24,7 @@ module.exports = class Subscriber {
         const channel = await connection.createChannel();
         channel.prefetch(10);
         const queue = 'Category subscription';
-        const exchange = 'amq.direct';
+        const exchange = 'amq.topic';
         const routingKey = 'sign_up_email';
         process.once('SIGINT', async () => { 
           console.log('got sigint, closing connection');
@@ -33,7 +33,7 @@ module.exports = class Subscriber {
           process.exit(0);
         });
     
-        await channel.assertExchange(exchange, 'direct', {durable: true});
+        await channel.assertExchange(exchange, 'topic', {durable: true});
         await channel.assertQueue(queue, {durable: true});
         await channel.bindQueue(queue, exchange, routingKey);
         await channel.consume(queue,async (msg) => {

@@ -22,11 +22,19 @@ module.exports = class SubscriptionService {
         return await this.subscribedUserRepository.getAllSubscribedByUser(email);
     }
 
+
+    async getAllSubscribedUsers() {
+        return await this.subscribedUserRepository.getAllSubscribedUser();
+    }
+
+
     async sendEmail(category,message) {
         try {
         let users = await this.getAllSubscribedUsers()
         users.forEach(subscribedUser => {
             if(subscribedUser.dataValues.categoryName==category.split('"')[0]){
+                console.log("=================2===============")
+                console.log(message.split('"')[1])
                  var mailOptions = {
                     from: "obligatorioarqusoft@gmail.com",
                     to: subscribedUser.dataValues.emailAddress,
@@ -58,6 +66,8 @@ module.exports = class SubscriptionService {
             );     
         }
     }
+
+   
 
     async auth(ctx, next) {    
         let token = ctx.get("authentication")

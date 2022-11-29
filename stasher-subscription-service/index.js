@@ -2,6 +2,7 @@ const server = require('./server');
 const Server = new server();
 const Subscriber = require("./src/services/subscriber")
 const suscriber = new Subscriber();
+
 const Repository = require("./src/repositories/repository");
 
 (async () => {

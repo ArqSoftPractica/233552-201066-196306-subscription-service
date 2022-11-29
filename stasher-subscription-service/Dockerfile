@@ -4,6 +4,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN ls
-EXPOSE 6065
+EXPOSE 6061
 
 CMD ["node",  "index.js"]
