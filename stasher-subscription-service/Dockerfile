@@ -6,4 +6,4 @@ COPY . .
 RUN ls
 EXPOSE 6061
 
-CMD ["node",  "index.js"]
+CMD [ "node", "-r", "newrelic", "index.js" ]
